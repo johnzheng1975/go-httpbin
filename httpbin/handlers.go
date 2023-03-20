@@ -49,6 +49,7 @@ func (h *HTTPBin) Get(w http.ResponseWriter, r *http.Request) {
 		Headers: getRequestHeaders(r),
 		Origin:  getClientIP(r),
 		URL:     getURL(r).String(),
+		Server:  h.server_env,
 	})
 }
 

@@ -10,6 +10,7 @@ const (
 	DefaultMaxBodySize int64 = 1024 * 1024
 	DefaultMaxDuration       = 10 * time.Second
 	DefaultHostname          = "go-httpbin"
+	DefaultServerEnv         = "server"
 )
 
 // DefaultParams defines default parameter values
@@ -47,6 +48,9 @@ type HTTPBin struct {
 
 	// The hostname to expose via /hostname.
 	hostname string
+	
+	// The server_env to expose via /get.
+	server_env string
 
 	// The app's http handler
 	handler http.Handler
@@ -59,6 +63,7 @@ func New(opts ...OptionFunc) *HTTPBin {
 		MaxDuration:   DefaultMaxDuration,
 		DefaultParams: DefaultDefaultParams,
 		hostname:      DefaultHostname,
+		server_env:    DefaultServerEnv,
 	}
 	for _, opt := range opts {
 		opt(h)

@@ -34,6 +34,13 @@ func WithHostname(s string) OptionFunc {
 	}
 }
 
+// WithServerEnv sets the server_env to return via the /get endpoint.
+func WithServerEnv(s string) OptionFunc {
+	return func(h *HTTPBin) {
+		h.server_env = s
+	}
+}
+
 // WithObserver sets the request observer callback
 func WithObserver(o Observer) OptionFunc {
 	return func(h *HTTPBin) {

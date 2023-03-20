@@ -73,6 +73,9 @@ func mainImpl(args []string, getEnv func(string) string, getHostname func() (str
 	if cfg.RealHostname != "" {
 		opts = append(opts, httpbin.WithHostname(cfg.RealHostname))
 	}
+	if cfg.ServerEnv != "" {
+		opts = append(opts, httpbin.WithServerEnv(cfg.ServerEnv))
+	}
 	if len(cfg.AllowedRedirectDomains) > 0 {
 		opts = append(opts, httpbin.WithAllowedRedirectDomains(cfg.AllowedRedirectDomains))
 	}
@@ -105,6 +108,7 @@ type config struct {
 	RealHostname           string
 	TLSCertFile            string
 	TLSKeyFile             string
+	ServerEnv              string
 
 	// temporary placeholders for arguments that need extra processing
 	rawAllowedRedirectDomains string
@@ -137,6 +141,7 @@ func loadConfig(args []string, getEnv func(string) string, getHostname func() (s
 	fs.Int64Var(&cfg.MaxBodySize, "max-body-size", httpbin.DefaultMaxBodySize, "Maximum size of request or response, in bytes")
 	fs.IntVar(&cfg.ListenPort, "port", defaultListenPort, "Port to listen on")
 	fs.StringVar(&cfg.rawAllowedRedirectDomains, "allowed-redirect-domains", "", "Comma-separated list of domains the /redirect-to endpoint will allow")
+	fs.StringVar(&cfg.ServerEnv, "server-env", "", "Server env, different for each deploy/region/cluster")
 	fs.StringVar(&cfg.ListenHost, "host", defaultListenHost, "Host to listen on")
 	fs.StringVar(&cfg.TLSCertFile, "https-cert-file", "", "HTTPS Server certificate file")
 	fs.StringVar(&cfg.TLSKeyFile, "https-key-file", "", "HTTPS Server private key file")
@@ -229,6 +234,11 @@ func loadConfig(args []string, getEnv func(string) string, getHostname func() (s
 		if strings.TrimSpace(domain) != "" {
 			cfg.AllowedRedirectDomains = append(cfg.AllowedRedirectDomains, strings.TrimSpace(domain))
 		}
+	}
+	
+	// Server env, different for each deploy/region/cluster
+	if cfg.ServerEnv == "" && getEnv("SERVER_ENV") != "" {
+		cfg.ServerEnv = getEnv("SERVER_ENV")
 	}
 
 	// reset temporary fields to their zero values
