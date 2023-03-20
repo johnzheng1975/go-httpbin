@@ -29,6 +29,7 @@ type noBodyResponse struct {
 	Headers http.Header `json:"headers"`
 	Origin  string      `json:"origin"`
 	URL     string      `json:"url"`
+	SERVER  string      `json:"server"`
 
 	Deflated bool `json:"deflated,omitempty"`
 	Gzipped  bool `json:"gzipped,omitempty"`
