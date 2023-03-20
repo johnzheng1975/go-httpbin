@@ -29,9 +29,9 @@ buildexamples: build
 	./examples/build-all
 .PHONY: buildexamples
 
-buildtests:
-	CGO_ENABLED=0 go test -ldflags="-s -w" -v -c -o $(DIST_PATH)/go-httpbin.test ./httpbin
-.PHONY: buildtests
+#buildtests:
+#	CGO_ENABLED=0 go test -ldflags="-s -w" -v -c -o $(DIST_PATH)/go-httpbin.test ./httpbin
+#.PHONY: buildtests
 
 clean:
 	rm -rf $(DIST_PATH) $(COVERAGE_PATH)
