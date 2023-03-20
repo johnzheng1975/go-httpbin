@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/DataDog/datadog-go v4.8.3+incompatible
-	github.com/mccutchen/go-httpbin/v2 v2.5.1
+	github.com/johnzheng1975/go-httpbin/v2 v2.5.1
 )
 
 require (
@@ -19,4 +19,4 @@ require (
 
 // Always build against the local version, to make it easier to update examples
 // in sync with changes to go-httpbin
-replace github.com/mccutchen/go-httpbin/v2 => ../..
+replace github.com/johnzheng1975/go-httpbin/v2 => ../..

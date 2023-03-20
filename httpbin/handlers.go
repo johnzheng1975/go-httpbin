@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mccutchen/go-httpbin/v2/httpbin/digest"
+	"github.com/johnzheng1975/go-httpbin/v2/httpbin/digest"
 )
 
 func notImplementedHandler(w http.ResponseWriter, r *http.Request) {

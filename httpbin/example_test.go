@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mccutchen/go-httpbin/v2/httpbin"
+	"github.com/johnzheng1975/go-httpbin/v2/httpbin"
 )
 
 func TestSlowResponse(t *testing.T) {
